@@ -1,0 +1,36 @@
+cmake_minimum_required(VERSION 3.10)
+project(RetroNexusEmulator)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Source files
+set(SOURCES
+    src/main.cpp
+    src/Emulator.cpp
+    src/GameBoyEmulator.cpp
+    src/PlayStationEmulator.cpp
+    src/PS1Emulator.cpp
+    src/PS2Emulator.cpp
+    src/SPU.cpp
+)
+
+# Add executable
+add_executable(emulator ${SOURCES})
+
+# Include directories
+target_include_directories(emulator 
+    PRIVATE 
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+# Add compiler flags for optimization
+if(MSVC)
+    target_compile_options(emulator PRIVATE /O2)
+else()
+    target_compile_options(emulator PRIVATE -O2)
+endif()
+
+# Add audio library dependencies (if needed)
+# find_package(SDL2 REQUIRED)
+# target_link_libraries(emulator PRIVATE SDL2::SDL2) 
